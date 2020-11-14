@@ -48,12 +48,3 @@ if __name__ == "__main__":
             for label in labels:
                 l_file.write(label)
                 l_file.write("\n")
-
-
-            #with open(os.path.join(args.input_dir, f_name)) as inp:
-                
-            #    for line in inp.
-            #    print(inp.readline())
-            #    break
-	        #out.write(inp.read().replace("\n", " "))
-	        #out.write("\n\n")
