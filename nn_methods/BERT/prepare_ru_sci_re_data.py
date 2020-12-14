@@ -29,23 +29,22 @@ def find_sentence_boundary(tokens, start, direction=-1):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--ner_input_dir', default="./raw_markup")
-    parser.add_argument('--input', default="./raw_markup/relations_2.csv")
-    parser.add_argument('--output_dir', default="./")
+    parser.add_argument('--input_dir', default="./preprocessed")
+    parser.add_argument('--input', default="./preprocessed/relations.csv")
+    parser.add_argument('--output_dir', default="./re_data")
     parser.add_argument('--test_split', default=0.1, type=float)
+    parser.add_argument('--seed', default=42, type=float)
 
     args = parser.parse_args(sys.argv[1:])
 
     with open(os.path.join(args.output_dir, "train.txt"), "w", encoding="utf-8") as train_out, \
             open(os.path.join(args.output_dir, "dev.txt"), "w", encoding="utf-8") as test_out:
         re_markup = pd.read_csv(args.input)
-        re_markup["join"] = re_markup[["Marker1", "Marker2", "Marker3"]].fillna("").apply(
-            lambda xs: "; ".join(list(set([a.strip() for x in xs for a in x.split("; ") if x]))), 1)
 
         examples = []
         err = 0
-        real_names = os.listdir(args.ner_input_dir)
-        for f_name, rels in re_markup[["Файл", "join"]].values:
+        real_names = os.listdir(args.input_dir)
+        for f_name, rels in re_markup[["Файл", "reviewed"]].values:
             print(f_name)
             rels = rels.replace(": ", "; ").strip()
             if rels.endswith(";"):
@@ -54,7 +53,7 @@ if __name__ == "__main__":
                              rels.split("; ") if x]
 
             real_name = f_name + ".csv"
-            df = pd.read_csv(os.path.join(args.ner_input_dir, real_name))
+            df = pd.read_csv(os.path.join(args.input_dir, real_name))
 
             for rel in formatted_rels:
                 rel = (rel[0].strip(), rel[1], rel[2])
@@ -92,17 +91,18 @@ if __name__ == "__main__":
                     print("---------------------")
                     examples = examples[:-1]
                     err += 1
-        print(err, len(examples))
+        print("Errors: ", err, ", examples: ",len(examples))
         # 50
 
         X = [ex[0] for ex in examples]
         y = [ex[1] for ex in examples]
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=args.test_split, random_state=42, stratify=y)
 
-        for label in ["USAGE", "PARTOF", "SYNONYMS", "ISA", "COMPARE", "NONE", "CAUSE"]:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=args.test_split, random_state=args.seed, stratify=y)
+
+        for label in ["PART_OF", "ISA", "USAGE", "TOOL", "SYNONYMS", "COMPARE", "CAUSE"]:
             print(f"Train, {label} - {len([i for i in y_train if i == label])}, {len([i for i in y_train if i == label]) / len(y_train)}%")
         print("-------------------------------------")
-        for label in ["USAGE", "PARTOF", "SYNONYMS", "ISA", "COMPARE", "NONE", "CAUSE"]:
+        for label in ["PART_OF", "ISA", "USAGE", "TOOL", "SYNONYMS", "COMPARE", "CAUSE"]:
             print(f"Test, {label} - {len([i for i in y_test if i == label])}, {len([i for i in y_test if i == label]) / len(y_test)}%")
 
         for i in range(len(X_train)):
