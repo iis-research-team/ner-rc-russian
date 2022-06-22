@@ -86,7 +86,7 @@ nltk == 3.5
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\module\loss\SoftplusLoss.py: 4
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\module\model\HolE.py: 2
 # D:\Projects\ner-rc-russian\nn_methods\Wikidata_preprocessing\prepare.py: 3
-numpy == 1.18.5
+numpy == 1.22.0
 
 # D:\Projects\ner-rc-russian\keywords_extraction_with_rake\ru_keywords_extractor.py: 5
 openpyxl == 3.0.4
