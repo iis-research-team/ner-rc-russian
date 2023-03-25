@@ -179,7 +179,7 @@ tagme == 0.1.3
 # D:\Projects\ner-rc-russian\nn_methods\ERNIE\pretrain_data\tokenization.py: 25
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\module\model\HolE.py: 3
 # D:\Projects\ner-rc-russian\nn_methods\Vocab\sp_for_bert.py: 7
-tensorflow == 2.3.1
+tensorflow == 2.11.1
 
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\get_embedding_matrix.py: 5
 tf2-initializer == 0.6
