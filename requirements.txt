@@ -124,7 +124,7 @@ razdel == 0.5.0
 
 # D:\Projects\ner-rc-russian\journal_scrappers\scrapper.py: 2
 # D:\Projects\ner-rc-russian\nn_methods\ERNIE\code\knowledge_bert\file_utils.py: 22
-requests == 2.24.0
+requests == 2.31.0
 
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\get_embedding_matrix.py: 5
 roomai == 0.1.16
