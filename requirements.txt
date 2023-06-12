@@ -223,7 +223,7 @@ transferflow == 0.1.8
 # D:\Projects\ner-rc-russian\nn_methods\BERT\run_language_modeling.py: 41
 # D:\Projects\ner-rc-russian\nn_methods\BERT\run_ner.py: 33
 # D:\Projects\ner-rc-russian\nn_methods\BERT\run_re.py: 32
-transformers == 4.0.1
+transformers == 4.30.0
 
 # D:\Projects\ner-rc-russian\nn_methods\OpenKE\openke\get_embedding_matrix.py: 5
 visual-hanoi == 0.2.0
